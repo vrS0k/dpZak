@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "923206161377",
+    "project_id": "diplom-e3b23",
+    "storage_bucket": "diplom-e3b23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923206161377:android:fe9ea35469b7bcd09938a0",
+        "android_client_info": {
+          "package_name": "com.example.diplom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923206161377-q1j1n5dli76m9s3k0drd5adrjfdntpi6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5BMTPE7Fk1-IQ2_xz93YN0yAGdFADMSE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923206161377-q1j1n5dli76m9s3k0drd5adrjfdntpi6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

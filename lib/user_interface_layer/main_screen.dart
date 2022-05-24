@@ -1,4 +1,5 @@
 import 'package:diplom/business_logic_layer/main_screen_cubit.dart';
+import 'package:diplom/user_interface_layer/widgets/custom_text_form.dart';
 import 'package:diplom/user_interface_layer/widgets/project_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   late final MainScreenCubit _cubit;
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -31,9 +33,28 @@ class _MainScreenState extends State<MainScreen> {
           case MainScreenStatus.failure:
             return Container();
           case MainScreenStatus.data:
-            return SingleChildScrollView(
-              child: Column(
-                children: state.projectList!.map((e) => ProjectWidget(project: e)).toList(),
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Main Screen'),
+              ),
+              body: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CustomTextForm(
+                      controller: _searchController,
+                      label: 'Поиск',
+                    ),
+                  ),
+                  const Divider(color: Colors.blue, thickness: 1, height: 20),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: state.projectList!.map((e) => ProjectWidget(project: e)).toList(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             );
           default:

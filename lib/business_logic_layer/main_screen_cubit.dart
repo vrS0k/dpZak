@@ -18,7 +18,7 @@ class MainScreenCubit extends Cubit<MainScreenState> {
 
   Future<void> getProjects () async {
     try{
-      List<ProjectModel> list = await firebaseRepository.getProject();
+      List<ProjectModel> list = await firebaseRepository.getAllProjects();
       emit(MainScreenState(status: MainScreenStatus.data, projectList: list));
     } catch (e) {
       emit(MainScreenState(status: MainScreenStatus.failure));

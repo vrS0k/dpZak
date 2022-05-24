@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:diplom/data_layer/models/user_model.dart';
 import 'package:diplom/data_layer/repository/repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -5,12 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../user_interface_layer/widgets/dialog_widget.dart';
 
 class ProfileScreenState {
-  ProfileScreenState({this.user});
+  ProfileScreenState({this.user, this.userData});
 
   final UserCredential? user;
+  final UserModel? userData;
 
-  ProfileScreenState copyWith({UserCredential? user}) {
-    return ProfileScreenState(user: user ?? this.user);
+  ProfileScreenState copyWith({UserCredential? user, UserModel? userData}) {
+    return ProfileScreenState(user: user ?? this.user, userData: userData ?? this.userData);
   }
 }
 
@@ -19,6 +23,37 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
 
   final FirebaseRepository firebaseRepository;
 
+  Future<void> refactorUserData({
+    required String surname,
+    required String name,
+    required String patronymic,
+    required String address,
+    required String phone,
+    required String uid,
+  }) async {
+    try {
+      await firebaseRepository.refactorUserData(
+        surname: surname,
+        name: name,
+        patronymic: patronymic,
+        address: address,
+        phone: phone,
+        uid: uid,
+      );
+      final UserModel userData = UserModel(
+        surname: surname,
+        name: name,
+        patronymic: patronymic,
+        address: address,
+        phone: phone,
+        uid: uid,
+      );
+      emit(state.copyWith(userData: userData));
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
   Future<void> authFire({required String email, required String password, required BuildContext context}) async {
     String errorMessage = "Произошла ошибка";
     try {
@@ -26,7 +61,8 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
         email: email,
         password: password,
       );
-      emit(state.copyWith(user: user));
+      final UserModel userData = await firebaseRepository.getUserData(user.user!.uid);
+      emit(state.copyWith(user: user, userData: userData));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         errorMessage = 'Для этого адреса электронной почты не найдено ни одного пользователя.';
@@ -76,7 +112,15 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
         address: address,
         phone: phone,
       );
-      emit(state.copyWith(user: user));
+      final UserModel userData = UserModel(
+        surname: surname,
+        name: name,
+        patronymic: patronymic,
+        address: address,
+        phone: phone,
+        uid: user.user!.uid,
+      );
+      emit(state.copyWith(user: user, userData: userData));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         errorMessage = "Предоставленный пароль слишком слаб.";

@@ -19,10 +19,20 @@ class CreateScreenCubit extends Cubit<CreateScreenState> {
     required String date,
     required String info,
     required BuildContext context,
+    required String authorSurname,
+    required String authorName,
+    required String authorUid,
   }) async {
     String result;
     try {
-      await firebaseRepository.addProject(name: name, date: date, info: info);
+      await firebaseRepository.addProject(
+        name: name,
+        date: date,
+        info: info,
+        authorSurname: authorSurname,
+        authorName: authorName,
+        authorUid: authorUid,
+      );
       state.nameController.clear();
       state.dataController.clear();
       state.informationController.clear();

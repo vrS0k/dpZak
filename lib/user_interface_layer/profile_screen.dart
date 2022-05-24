@@ -1,5 +1,6 @@
 import 'package:diplom/business_logic_layer/profile_screen_cubit.dart';
 import 'package:diplom/user_interface_layer/widgets/custom_text_form.dart';
+import 'package:diplom/user_interface_layer/widgets/profile_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -188,9 +189,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           );
         } else {
-          return Container();
+          surnameController.text = state.userData!.surname;
+          nameController.text = state.userData!.name;
+          patronymicController.text = state.userData!.patronymic;
+          addressController.text = state.userData!.address;
+          phoneController.text = state.userData!.phone;
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(30)),
+                    color: Colors.blue.withOpacity(0.2),
+                  ),
+                  child: const Center(child: Text('Профиль', style: TextStyle(fontSize: 30))),
+                ),
+              ),
+              ProfileRow(label: 'Фамилия', controller: surnameController, onTap: refactorUserData),
+              ProfileRow(label: 'Имя', controller: nameController, onTap: refactorUserData),
+              ProfileRow(label: 'Отчество', controller: patronymicController, onTap: refactorUserData),
+              ProfileRow(label: 'Адрес', controller: addressController, onTap: refactorUserData),
+              ProfileRow(label: 'Телефон', controller: phoneController, onTap: refactorUserData),
+            ],
+          );
         }
       },
+    );
+  }
+
+  void refactorUserData() {
+    _cubit.refactorUserData(
+      surname: surnameController.text,
+      name: nameController.text,
+      patronymic: patronymicController.text,
+      address: addressController.text,
+      phone: phoneController.text,
+      uid: _cubit.state.userData!.uid,
     );
   }
 }

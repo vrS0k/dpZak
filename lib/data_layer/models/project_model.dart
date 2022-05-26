@@ -5,6 +5,8 @@ class ProjectModel {
   String authorSurname;
   String authorName;
   String authorUid;
+  String lng;
+  String lat;
   String id;
 
   ProjectModel({
@@ -15,5 +17,7 @@ class ProjectModel {
     required this.authorName,
     required this.authorUid,
     required this.id,
+    required this.lat,
+    required this.lng,
   });
 }

@@ -1,9 +1,7 @@
 import 'package:diplom/data_layer/models/comment_model.dart';
 import 'package:diplom/data_layer/repository/repository.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../user_interface_layer/widgets/dialog_widget.dart';
 
 enum CommentsStatus { loading, data, failure }

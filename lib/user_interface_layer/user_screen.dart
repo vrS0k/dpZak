@@ -1,7 +1,9 @@
+import 'dart:developer';
 import 'package:diplom/business_logic_layer/user_screen_cubit.dart';
 import 'package:diplom/user_interface_layer/widgets/project_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class UserScreen extends StatefulWidget {
   final String uid;
@@ -76,7 +78,20 @@ class _UserScreenState extends State<UserScreen> {
                     child: Row(
                       children: [
                         const Text("Телефон : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(state.userData!.phone),
+                        GestureDetector(
+                          onTap: () {
+                            var url = "tel:${state.userData!.phone}";
+                            try {
+                              launchUrlString(url);
+                            } catch (e) {
+                              log(e.toString());
+                            }
+                          },
+                          child: Text(
+                            state.userData!.phone,
+                            style: const TextStyle(color: Colors.blue),
+                          ),
+                        ),
                       ],
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:diplom/business_logic_layer/comments_cubit.dart';
 import 'package:diplom/business_logic_layer/create_screen_cubit.dart';
 import 'package:diplom/business_logic_layer/main_screen_cubit.dart';
+import 'package:diplom/business_logic_layer/members_cubit.dart';
 import 'package:diplom/business_logic_layer/profile_screen_cubit.dart';
 import 'package:diplom/business_logic_layer/user_screen_cubit.dart';
 import 'package:diplom/data_layer/repository/repository.dart';
@@ -21,6 +22,7 @@ Future<void> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider<MembersCubit>(create: (context) => MembersCubit(firebaseRepository: _fire)),
         BlocProvider<CommentsCubit>(create: (context) => CommentsCubit(firebaseRepository: _fire)),
         BlocProvider<UserScreenCubit>(create: (context) => UserScreenCubit(firebaseRepository: _fire)),
         BlocProvider<ProfileScreenCubit>(create: (context) => ProfileScreenCubit(firebaseRepository: _fire)),

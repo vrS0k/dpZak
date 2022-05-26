@@ -30,6 +30,7 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
     required String address,
     required String phone,
     required String uid,
+    required List projectId,
   }) async {
     try {
       await firebaseRepository.refactorUserData(
@@ -47,8 +48,18 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
         address: address,
         phone: phone,
         uid: uid,
+        projectIdList: projectId,
       );
       emit(state.copyWith(userData: userData));
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future<void> updateUser({required String uid}) async {
+    try {
+      final UserModel userData = await firebaseRepository.getUserData(uid);
+      emit(state.copyWith(user: state.user, userData: userData));
     } catch (e) {
       log(e.toString());
     }
@@ -97,6 +108,7 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
     required String patronymic,
     required String address,
     required String phone,
+    required List<String> projectId,
   }) async {
     String errorMessage = "Произошла ошибка";
     try {
@@ -119,6 +131,7 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
         address: address,
         phone: phone,
         uid: user.user!.uid,
+        projectIdList: projectId,
       );
       emit(state.copyWith(user: user, userData: userData));
     } on FirebaseAuthException catch (e) {

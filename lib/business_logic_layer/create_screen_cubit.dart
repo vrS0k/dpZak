@@ -22,6 +22,8 @@ class CreateScreenCubit extends Cubit<CreateScreenState> {
     required String authorSurname,
     required String authorName,
     required String authorUid,
+    required String lat,
+    required String lng,
   }) async {
     String result;
     try {
@@ -32,6 +34,8 @@ class CreateScreenCubit extends Cubit<CreateScreenState> {
         authorSurname: authorSurname,
         authorName: authorName,
         authorUid: authorUid,
+        lat: lat,
+        lng: lng,
       );
       state.nameController.clear();
       state.dataController.clear();

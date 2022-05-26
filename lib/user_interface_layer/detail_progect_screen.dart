@@ -1,10 +1,13 @@
 import 'package:diplom/business_logic_layer/comments_cubit.dart';
+import 'package:diplom/business_logic_layer/members_cubit.dart';
 import 'package:diplom/business_logic_layer/profile_screen_cubit.dart';
 import 'package:diplom/data_layer/models/project_model.dart';
 import 'package:diplom/user_interface_layer/user_screen.dart';
 import 'package:diplom/user_interface_layer/widgets/custom_text_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class DetailProjectScreen extends StatefulWidget {
   final ProjectModel project;
@@ -18,14 +21,21 @@ class DetailProjectScreen extends StatefulWidget {
 class _DetailProjectScreenState extends State<DetailProjectScreen> {
   late final ProfileScreenCubit _userCubit;
   late final CommentsCubit _commentsCubit;
+  late final MembersCubit _membersCubit;
+  bool thisUser = false;
   TextEditingController commentController = TextEditingController();
   TextEditingController gradeController = TextEditingController();
+  final MapController _mapController = MapController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     _userCubit = BlocProvider.of<ProfileScreenCubit>(context);
     _commentsCubit = BlocProvider.of<CommentsCubit>(context);
+    _membersCubit = BlocProvider.of<MembersCubit>(context);
+    _membersCubit.clean();
+    _membersCubit.getMembers(widget.project.id);
+    thisUser = false;
     _commentsCubit.getComments(widget.project.id);
     super.initState();
   }
@@ -59,7 +69,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text("Автор : " + widget.project.authorSurname + " " + widget.project.name),
+                    child: Text("Автор : " + widget.project.authorSurname + " " + widget.project.authorName),
                   ),
                 ),
               ),
@@ -105,6 +115,158 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                   Expanded(child: Text(widget.project.info)),
                 ],
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.width * 0.66,
+                child: FlutterMap(
+                  mapController: _mapController,
+                  options: MapOptions(
+                    center: LatLng(double.parse(widget.project.lat), double.parse(widget.project.lng)),
+                    zoom: 16.0,
+                  ),
+                  layers: [
+                    TileLayerOptions(
+                      urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      subdomains: ['a', 'b', 'c'],
+                      attributionBuilder: (_) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.add, size: 40),
+                              onPressed: () {
+                                _mapController.move(
+                                  _mapController.center,
+                                  _mapController.zoom + 1,
+                                );
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 14.0),
+                              child: IconButton(
+                                icon: const Icon(Icons.minimize, size: 40),
+                                onPressed: () {
+                                  _mapController.move(
+                                    _mapController.center,
+                                    _mapController.zoom - 1,
+                                  );
+                                },
+                              ),
+                            )
+                          ],
+                        );
+                      },
+                    ),
+                    MarkerLayerOptions(
+                      markers: [
+                        Marker(
+                          width: 80.0,
+                          height: 80.0,
+                          point: LatLng(double.parse(widget.project.lat), double.parse(widget.project.lng)),
+                          builder: (ctx) => const Icon(
+                            Icons.location_on,
+                            color: Colors.red,
+                            size: 40,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const Divider(color: Colors.blue, thickness: 1),
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                "Участники : ",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            BlocBuilder<ProfileScreenCubit, ProfileScreenState>(
+              bloc: _userCubit,
+              builder: (context, state) {
+                if (state.userData != null) {
+                  return BlocBuilder<MembersCubit, MembersState>(
+                    bloc: _membersCubit,
+                    builder: (context, state) {
+                      if (state.status == MembersStatus.data) {
+                        return Wrap(
+                          children: [
+                            ...state.members!.map((e) {
+                              if (e.uid == _userCubit.state.userData!.uid) {
+                                Future.delayed(const Duration(microseconds: 100)).then((value) {
+                                  setState(() {
+                                    thisUser = true;
+                                  });
+                                });
+                              }
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) => UserScreen(
+                                        uid: e.uid,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                                      color: Colors.blue.withOpacity(0.2),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Text(e.surname + " " + e.name),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            thisUser
+                                ? const SizedBox()
+                                : Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        _membersCubit.addMember(
+                                          surname: _userCubit.state.userData!.surname,
+                                          name: _userCubit.state.userData!.name,
+                                          patronymic: _userCubit.state.userData!.patronymic,
+                                          address: _userCubit.state.userData!.address,
+                                          phone: _userCubit.state.userData!.phone,
+                                          uid: _userCubit.state.userData!.uid,
+                                          projectIdList: _userCubit.state.userData!.projectIdList,
+                                          projectId: widget.project.id,
+                                          context: context,
+                                        );
+                                      },
+                                      child: const Text('Учавствовать'),
+                                    ),
+                                )
+                          ],
+                        );
+                      } else {
+                        return Container();
+                      }
+                    },
+                  );
+                } else {
+                  return const Text(
+                    "Просмотр Участников доступен только авторизованным пользователям",
+                    textAlign: TextAlign.center,
+                  );
+                }
+              },
             ),
             const Divider(color: Colors.blue, thickness: 1),
             const Padding(
@@ -197,6 +359,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: CustomTextForm(
+                                        textInputType: TextInputType.number,
                                         label: "Оценка (цифра от 1 до 10)",
                                         controller: gradeController,
                                       ),

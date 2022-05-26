@@ -161,7 +161,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   const SizedBox(height: 15),
                                   CustomTextForm(label: "Адресс", controller: addressController),
                                   const SizedBox(height: 15),
-                                  CustomTextForm(label: "Телефон", controller: phoneController),
+                                  CustomTextForm(
+                                    label: "Телефон",
+                                    controller: phoneController,
+                                    textInputType: TextInputType.number,
+                                  ),
                                   ElevatedButton(
                                     onPressed: () {
                                       if (_formKey.currentState!.validate()) {
@@ -174,6 +178,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           patronymic: patronymicController.text,
                                           address: addressController.text,
                                           phone: phoneController.text,
+                                          projectId: [],
                                         );
                                       }
                                     },
@@ -194,25 +199,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
           patronymicController.text = state.userData!.patronymic;
           addressController.text = state.userData!.address;
           phoneController.text = state.userData!.phone;
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(30)),
-                    color: Colors.blue.withOpacity(0.2),
-                  ),
-                  child: const Center(child: Text('Профиль', style: TextStyle(fontSize: 30))),
-                ),
-              ),
-              ProfileRow(label: 'Фамилия', controller: surnameController, onTap: refactorUserData),
-              ProfileRow(label: 'Имя', controller: nameController, onTap: refactorUserData),
-              ProfileRow(label: 'Отчество', controller: patronymicController, onTap: refactorUserData),
-              ProfileRow(label: 'Адрес', controller: addressController, onTap: refactorUserData),
-              ProfileRow(label: 'Телефон', controller: phoneController, onTap: refactorUserData),
-            ],
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Profile Screen'),
+              centerTitle: true,
+            ),
+            body: Column(
+              children: [
+                ProfileRow(label: 'Фамилия', controller: surnameController, onTap: refactorUserData),
+                ProfileRow(label: 'Имя', controller: nameController, onTap: refactorUserData),
+                ProfileRow(label: 'Отчество', controller: patronymicController, onTap: refactorUserData),
+                ProfileRow(label: 'Адрес', controller: addressController, onTap: refactorUserData),
+                ProfileRow(label: 'Телефон', controller: phoneController, onTap: refactorUserData),
+              ],
+            ),
           );
         }
       },
@@ -227,6 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       address: addressController.text,
       phone: phoneController.text,
       uid: _cubit.state.userData!.uid,
+      projectId: _cubit.state.userData!.projectIdList,
     );
   }
 }

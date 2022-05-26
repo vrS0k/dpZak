@@ -28,6 +28,7 @@ class _ProfileRowState extends State<ProfileRow> {
           SizedBox(
             width: MediaQuery.of(context).size.width / 2,
             child: TextFormField(
+              keyboardType: widget.label == 'Телефон' ? TextInputType.number : null,
               enabled: !viewState,
               controller: widget.controller,
               decoration: InputDecoration(

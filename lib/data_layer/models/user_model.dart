@@ -5,6 +5,7 @@ class UserModel {
   String address;
   String phone;
   String uid;
+  List projectIdList;
 
   UserModel({
     required this.surname,
@@ -13,5 +14,6 @@ class UserModel {
     required this.address,
     required this.phone,
     required this.uid,
+    required this.projectIdList,
   });
 }

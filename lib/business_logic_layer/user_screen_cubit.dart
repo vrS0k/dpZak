@@ -23,7 +23,7 @@ class UserScreenCubit extends Cubit<UserScreenState> {
   Future<void> getUserData({required String uid}) async {
     try {
       final UserModel userData = await firebaseRepository.getUserData(uid);
-      final List<ProjectModel> projects = await firebaseRepository.getAllProjects();
+      final List<ProjectModel> projects = await firebaseRepository.getProjectsBuUid(uid);
       emit(state.copyWith(projects: projects, userData: userData));
     } catch (e) {
       log(e.toString());

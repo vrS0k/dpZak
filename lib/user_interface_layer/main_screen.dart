@@ -36,12 +36,16 @@ class _MainScreenState extends State<MainScreen> {
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Main Screen'),
+                centerTitle: true,
               ),
               body: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextForm(
+                      onChanged: (String value){
+                        setState(() {});
+                      },
                       controller: _searchController,
                       label: 'Поиск',
                     ),
@@ -50,7 +54,10 @@ class _MainScreenState extends State<MainScreen> {
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
-                        children: state.projectList!.map((e) => ProjectWidget(project: e)).toList(),
+                        children: state.projectList!
+                            .map((e) =>
+                                e.name.contains(_searchController.text) ? ProjectWidget(project: e) : const SizedBox())
+                            .toList(),
                       ),
                     ),
                   ),

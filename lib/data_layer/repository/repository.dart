@@ -44,6 +44,7 @@ class FirebaseRepository {
     required String address,
     required String phone,
     required String uid,
+    List<String>? projectId,
   }) async {
     try {
       await users.where("uid", isEqualTo: uid).get().then(
@@ -56,6 +57,7 @@ class FirebaseRepository {
               "patronymic": patronymic,
               "address": address,
               "phone": phone,
+              "projectId" : projectId,
             });
           }
         },
@@ -69,7 +71,7 @@ class FirebaseRepository {
   Future<List<ProjectModel>> getProjectsBuUid(String uid) async {
     try {
       List<ProjectModel> projectsList = [];
-      await projects.where("uid", isEqualTo: uid).get().then(
+      await projects.where("authorUid", isEqualTo: uid).get().then(
             (value) {
           for (var element in value.docs) {
             Map mapResponse = element.data() as Map;
@@ -80,6 +82,8 @@ class FirebaseRepository {
               authorSurname: mapResponse["authorSurname"],
               authorName: mapResponse["authorName"],
               authorUid: mapResponse["authorUid"],
+              lat: mapResponse["lat"],
+              lng: mapResponse["lng"],
               id: element.id,
             ));
           }
@@ -106,6 +110,7 @@ class FirebaseRepository {
               address: mapResponse["address"],
               phone: mapResponse["phone"],
               uid: mapResponse["uid"],
+              projectIdList : mapResponse["projectId"] ?? <String>[],
             );
           }
         },
@@ -131,6 +136,8 @@ class FirebaseRepository {
               authorSurname: mapResponse["authorSurname"],
               authorName: mapResponse["authorName"],
               authorUid: mapResponse["authorUid"],
+              lat: mapResponse["lat"],
+              lng: mapResponse["lng"],
               id: element.id,
             ));
           }
@@ -173,6 +180,8 @@ class FirebaseRepository {
     required String authorSurname,
     required String authorName,
     required String authorUid,
+    required String lat,
+    required String lng,
   }) async {
     try {
       await projects.add({
@@ -182,7 +191,35 @@ class FirebaseRepository {
         "authorSurname": authorSurname,
         "authorName": authorName,
         "authorUid": authorUid,
+        "lat" : lat,
+        "lng" : lng,
       });
+    } catch (e) {
+      log(e.toString());
+      throw Exception();
+    }
+  }
+
+  Future<List<UserModel>> getMembers(String projectId) async {
+    try {
+      List<UserModel> membersList = [];
+      await users.where("projectId", arrayContains: projectId).get().then(
+            (value) {
+          for (var element in value.docs) {
+            Map mapResponse = element.data() as Map;
+            membersList.add(UserModel(
+              surname: mapResponse["surname"],
+              name: mapResponse["name"],
+              patronymic: mapResponse["patronymic"],
+              address: mapResponse["address"],
+              phone: mapResponse["phone"],
+              uid: mapResponse["uid"],
+              projectIdList: mapResponse["projectId"],
+            ));
+          }
+        },
+      );
+      return membersList;
     } catch (e) {
       log(e.toString());
       throw Exception();

@@ -26,13 +26,17 @@ class ProjectWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(project.name, style: const TextStyle(color: Colors.white)),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(project.name, style: const TextStyle(color: Colors.white)),
+                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(project.date, style: const TextStyle(color: Colors.white)),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(project.date, style: const TextStyle(color: Colors.white), textAlign: TextAlign.right,),
+                    ),
                   ),
                 ],
               ),

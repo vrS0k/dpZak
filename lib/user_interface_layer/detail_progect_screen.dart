@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailProjectScreen extends StatefulWidget {
   final ProjectModel project;
@@ -37,6 +38,15 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
     _membersCubit.getMembers(widget.project.id);
     thisUser = false;
     _commentsCubit.getComments(widget.project.id);
+    SharedPreferences.getInstance().then((value) {
+      setState(() {
+        List<String> viewList = value.getStringList('items') ?? [];
+        if (!viewList.contains(widget.project.id)){
+          viewList.add(widget.project.id);
+        }
+        value.setStringList('items', viewList);
+      });
+    });
     super.initState();
   }
 
@@ -78,13 +88,15 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 children: [
-                  const Text(
-                    "Название : ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                  const Expanded(
+                    child: Text(
+                      "Название : ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  Text(widget.project.name),
+                  Expanded(child: Text(widget.project.name)),
                 ],
               ),
             ),
@@ -92,13 +104,15 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 children: [
-                  const Text(
-                    "Дата проведения : ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                  const Expanded(
+                    child: Text(
+                      "Дата проведения : ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  Text(widget.project.date),
+                  Expanded(child: Text(widget.project.date)),
                 ],
               ),
             ),

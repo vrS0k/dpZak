@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class CustomTextForm extends StatelessWidget {
   final Function(String)? onChanged;
+  final Function()? onCleanTap;
   final TextInputType? textInputType;
   final TextEditingController controller;
   final String label;
+  final bool? pass;
 
   const CustomTextForm({
     Key? key,
@@ -12,6 +14,8 @@ class CustomTextForm extends StatelessWidget {
     required this.label,
     this.onChanged,
     this.textInputType,
+    this.pass,
+    this.onCleanTap,
   }) : super(key: key);
 
   @override
@@ -19,6 +23,7 @@ class CustomTextForm extends StatelessWidget {
     return TextFormField(
       onChanged: onChanged,
       controller: controller,
+      obscureText: pass ?? false,
       keyboardType: textInputType,
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -32,6 +37,9 @@ class CustomTextForm extends StatelessWidget {
         suffixIcon: IconButton(
           onPressed: () {
             controller.clear();
+            if (onCleanTap != null) {
+              onCleanTap!();
+            }
           },
           icon: const Icon(Icons.clear),
         ),

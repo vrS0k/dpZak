@@ -29,10 +29,13 @@ class _CreateScreenState extends State<CreateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create Project Screen'),
+      appBar: MediaQuery.of(context).size.width > 300
+          ? AppBar(
+        title: const Text('Создание проекта'),
         centerTitle: true,
-      ),
+      )
+          : const PreferredSize(
+          child: SizedBox(), preferredSize: Size(0, 0)),
       body: BlocBuilder<ProfileScreenCubit, ProfileScreenState>(
           bloc: _userCubit,
           builder: (context, state) {
@@ -63,56 +66,88 @@ class _CreateScreenState extends State<CreateScreen> {
                               mapController: _mapController,
                               options: MapOptions(
                                 center: LatLng(56.3261885,44.0026886),
-                                zoom: 16.0,
+                                zoom: MediaQuery.of(context).size.width > 300 ? 16.0 : 12,
                               ),
                               layers: [
                                 TileLayerOptions(
                                   urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                                   subdomains: ['a', 'b', 'c'],
                                   attributionBuilder: (_) {
-                                    return Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        const SizedBox(width: 100),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            bottom: MediaQuery.of(context).size.width * 0.66 * 0.5 - 15,
-                                          ),
-                                          child: const Icon(
-                                            Icons.location_searching,
-                                            size: 30,
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            IconButton(
-                                              icon: const Icon(Icons.add, size: 40),
-                                              onPressed: () {
-                                                _mapController.move(
-                                                  _mapController.center,
-                                                  _mapController.zoom + 1,
-                                                );
-                                              },
+                                    if (MediaQuery.of(context).size.width > 300) {
+                                      return Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          const SizedBox(width: 100),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              bottom: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.66 *
+                                                      0.5 -
+                                                  15,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(bottom: 14.0),
-                                              child: IconButton(
-                                                icon: const Icon(Icons.minimize, size: 40),
+                                            child: const Icon(
+                                              Icons.location_searching,
+                                              size: 30,
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              IconButton(
+                                                icon: const Icon(Icons.add,
+                                                    size: 40),
                                                 onPressed: () {
                                                   _mapController.move(
                                                     _mapController.center,
-                                                    _mapController.zoom - 1,
+                                                    _mapController.zoom + 1,
                                                   );
                                                 },
                                               ),
-                                            ),
-                                          ],
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 14.0),
+                                                child: IconButton(
+                                                  icon: const Icon(
+                                                      Icons.minimize,
+                                                      size: 40),
+                                                  onPressed: () {
+                                                    _mapController.move(
+                                                      _mapController.center,
+                                                      _mapController.zoom - 1,
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                    else {
+                                      return Padding(
+                                        padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .size
+                                              .width *
+                                              0.66 *
+                                              0.5 -
+                                              15,
+                                          right: MediaQuery.of(context).size.width/2 - 35
                                         ),
-                                      ],
-                                    );
+                                        child: const Icon(
+                                          Icons.location_searching,
+                                          size: 30,
+                                          color: Colors.red,
+                                        ),
+                                      );
+                                    }
                                   },
                                 ),
                               ],

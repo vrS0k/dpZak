@@ -1,5 +1,4 @@
 import 'package:diplom/business_logic_layer/profile_screen_cubit.dart';
-import 'package:diplom/business_logic_layer/user_screen_cubit.dart';
 import 'package:diplom/data_layer/models/user_model.dart';
 import 'package:diplom/data_layer/repository/repository.dart';
 import 'package:flutter/material.dart';

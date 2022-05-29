@@ -34,29 +34,41 @@ class _MainScreenState extends State<MainScreen> {
             return Container();
           case MainScreenStatus.data:
             return Scaffold(
-              appBar: AppBar(
-                title: const Text('Main Screen'),
-                centerTitle: true,
-              ),
+              appBar: MediaQuery.of(context).size.width > 300
+                  ? AppBar(
+                      title: const Text('Main Screen'),
+                      centerTitle: true,
+                    )
+                  : const PreferredSize(
+                      child: SizedBox(), preferredSize: Size(0, 0)),
               body: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomTextForm(
-                      onChanged: (String value){
-                        setState(() {});
-                      },
-                      controller: _searchController,
-                      label: 'Поиск',
-                    ),
-                  ),
-                  const Divider(color: Colors.blue, thickness: 1, height: 20),
+                  MediaQuery.of(context).size.width > 300
+                      ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomTextForm(
+                            onChanged: (String value) {
+                              setState(() {});
+                            },
+                            onCleanTap: (){
+                              setState(() {});
+                            },
+                            controller: _searchController,
+                            label: 'Поиск',
+                          ),
+                        )
+                      : const SizedBox(),
+                  MediaQuery.of(context).size.width > 300
+                      ? const Divider(
+                          color: Colors.blue, thickness: 1, height: 20)
+                      : const SizedBox(),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         children: state.projectList!
-                            .map((e) =>
-                                e.name.contains(_searchController.text) ? ProjectWidget(project: e) : const SizedBox())
+                            .map((e) => e.name.contains(_searchController.text)
+                                ? ProjectWidget(project: e)
+                                : const SizedBox())
                             .toList(),
                       ),
                     ),

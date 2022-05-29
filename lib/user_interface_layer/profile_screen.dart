@@ -110,13 +110,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               key: _formKey,
                               child: Column(
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(15.0),
-                                    child: Text('Вход', style: TextStyle(fontSize: 30)),
-                                  ),
+                                  MediaQuery.of(context).size.width > 300
+                                      ? const Padding(
+                                          padding: EdgeInsets.all(15.0),
+                                          child: Text('Вход', style: TextStyle(fontSize: 30)),
+                                        )
+                                      : const SizedBox(),
                                   CustomTextForm(label: "Email", controller: emailController),
                                   const SizedBox(height: 15),
-                                  CustomTextForm(label: "Пароль", controller: passController),
+                                  CustomTextForm(label: "Пароль", controller: passController, pass: true),
                                   ElevatedButton(
                                     onPressed: () {
                                       if (_formKey.currentState!.validate()) {
@@ -145,13 +147,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               key: _formKey,
                               child: Column(
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(15.0),
-                                    child: Text('Регистрация', style: TextStyle(fontSize: 30)),
-                                  ),
+                                  MediaQuery.of(context).size.width > 300
+                                      ? const Padding(
+                                          padding: EdgeInsets.all(15.0),
+                                          child: Text('Регистрация', style: TextStyle(fontSize: 30)),
+                                        )
+                                      : const SizedBox(),
                                   CustomTextForm(label: "Email", controller: emailController),
                                   const SizedBox(height: 15),
-                                  CustomTextForm(label: "Пароль", controller: passController),
+                                  CustomTextForm(label: "Пароль", controller: passController, pass: true),
                                   const SizedBox(height: 15),
                                   CustomTextForm(label: "Фамилия", controller: surnameController),
                                   const SizedBox(height: 15),
@@ -200,18 +204,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
           addressController.text = state.userData!.address;
           phoneController.text = state.userData!.phone;
           return Scaffold(
-            appBar: AppBar(
-              title: const Text('Profile Screen'),
+            appBar: MediaQuery.of(context).size.width > 300
+                ? AppBar(
+              title: const Text('Профиль'),
               centerTitle: true,
-            ),
-            body: Column(
-              children: [
-                ProfileRow(label: 'Фамилия', controller: surnameController, onTap: refactorUserData),
-                ProfileRow(label: 'Имя', controller: nameController, onTap: refactorUserData),
-                ProfileRow(label: 'Отчество', controller: patronymicController, onTap: refactorUserData),
-                ProfileRow(label: 'Адрес', controller: addressController, onTap: refactorUserData),
-                ProfileRow(label: 'Телефон', controller: phoneController, onTap: refactorUserData),
-              ],
+            )
+                : const PreferredSize(
+                child: SizedBox(), preferredSize: Size(0, 0)),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ProfileRow(label: 'Фамилия', controller: surnameController, onTap: refactorUserData),
+                  ProfileRow(label: 'Имя', controller: nameController, onTap: refactorUserData),
+                  ProfileRow(label: 'Отчество', controller: patronymicController, onTap: refactorUserData),
+                  ProfileRow(label: 'Адрес', controller: addressController, onTap: refactorUserData),
+                  ProfileRow(label: 'Телефон', controller: phoneController, onTap: refactorUserData),
+                ],
+              ),
             ),
           );
         }

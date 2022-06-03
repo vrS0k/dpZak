@@ -10,7 +10,7 @@ class CreateScreen extends StatefulWidget {
   const CreateScreen({Key? key}) : super(key: key);
 
   @override
-  State<CreateScreen> createState() => _CreateScreenState();
+  State<CreateScreen> createState() => _CreateScreenState(); // _ - приватный класс доступный только в этом файле
 }
 
 class _CreateScreenState extends State<CreateScreen> {
@@ -20,7 +20,7 @@ class _CreateScreenState extends State<CreateScreen> {
   final MapController _mapController = MapController();
 
   @override
-  void initState() {
+  void initState() { // метод виджетов выполняется когда создается виджет до постройки
     _userCubit = BlocProvider.of<ProfileScreenCubit>(context);
     _cubit = BlocProvider.of<CreateScreenCubit>(context);
     super.initState();
@@ -28,7 +28,7 @@ class _CreateScreenState extends State<CreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( // виджет экрана у которого есть поля апп бар и боди
       appBar: MediaQuery.of(context).size.width > 300
           ? AppBar(
         title: const Text('Создание проекта'),

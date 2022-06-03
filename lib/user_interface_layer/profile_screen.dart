@@ -1,5 +1,6 @@
 import 'package:diplom/business_logic_layer/profile_screen_cubit.dart';
 import 'package:diplom/user_interface_layer/widgets/custom_text_form.dart';
+import 'package:diplom/user_interface_layer/widgets/custom_text_form_phone.dart';
 import 'package:diplom/user_interface_layer/widgets/profile_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,18 +54,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           });
                         },
                         child: Container(
-                          color: authState == AuthState.auth ? Colors.blue : Colors.white,
+                          color: authState == AuthState.auth
+                              ? Colors.blue
+                              : Colors.white,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: authState == AuthState.auth
-                                  ? const BorderRadius.only(topRight: Radius.circular(25))
-                                  : const BorderRadius.only(bottomRight: Radius.circular(25)),
-                              color: authState == AuthState.auth ? Colors.white : Colors.blue,
+                                  ? const BorderRadius.only(
+                                      topRight: Radius.circular(25))
+                                  : const BorderRadius.only(
+                                      bottomRight: Radius.circular(25)),
+                              color: authState == AuthState.auth
+                                  ? Colors.white
+                                  : Colors.blue,
                             ),
                             child: Center(
                               child: Text(
                                 'Вход',
-                                style: TextStyle(color: authState == AuthState.auth ? Colors.black : Colors.white),
+                                style: TextStyle(
+                                    color: authState == AuthState.auth
+                                        ? Colors.black
+                                        : Colors.white),
                               ),
                             ),
                           ),
@@ -79,18 +89,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           });
                         },
                         child: Container(
-                          color: authState == AuthState.auth ? Colors.white : Colors.blue,
+                          color: authState == AuthState.auth
+                              ? Colors.white
+                              : Colors.blue,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: authState == AuthState.auth
-                                  ? const BorderRadius.only(bottomLeft: Radius.circular(25))
-                                  : const BorderRadius.only(topLeft: Radius.circular(25)),
-                              color: authState == AuthState.auth ? Colors.blue : Colors.white,
+                                  ? const BorderRadius.only(
+                                      bottomLeft: Radius.circular(25))
+                                  : const BorderRadius.only(
+                                      topLeft: Radius.circular(25)),
+                              color: authState == AuthState.auth
+                                  ? Colors.blue
+                                  : Colors.white,
                             ),
                             child: Center(
                               child: Text(
                                 'Регистрация',
-                                style: TextStyle(color: authState == AuthState.auth ? Colors.white : Colors.black),
+                                style: TextStyle(
+                                    color: authState == AuthState.auth
+                                        ? Colors.white
+                                        : Colors.black),
                               ),
                             ),
                           ),
@@ -113,12 +132,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   MediaQuery.of(context).size.width > 300
                                       ? const Padding(
                                           padding: EdgeInsets.all(15.0),
-                                          child: Text('Вход', style: TextStyle(fontSize: 30)),
+                                          child: Text('Вход',
+                                              style: TextStyle(fontSize: 30)),
                                         )
                                       : const SizedBox(),
-                                  CustomTextForm(label: "Email", controller: emailController),
+                                  CustomTextForm(
+                                      label: "Email",
+                                      controller: emailController),
                                   const SizedBox(height: 15),
-                                  CustomTextForm(label: "Пароль", controller: passController, pass: true),
+                                  CustomTextForm(
+                                      label: "Пароль",
+                                      controller: passController,
+                                      pass: true),
                                   ElevatedButton(
                                     onPressed: () {
                                       if (_formKey.currentState!.validate()) {
@@ -150,22 +175,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   MediaQuery.of(context).size.width > 300
                                       ? const Padding(
                                           padding: EdgeInsets.all(15.0),
-                                          child: Text('Регистрация', style: TextStyle(fontSize: 30)),
+                                          child: Text('Регистрация',
+                                              style: TextStyle(fontSize: 30)),
                                         )
                                       : const SizedBox(),
-                                  CustomTextForm(label: "Email", controller: emailController),
-                                  const SizedBox(height: 15),
-                                  CustomTextForm(label: "Пароль", controller: passController, pass: true),
-                                  const SizedBox(height: 15),
-                                  CustomTextForm(label: "Фамилия", controller: surnameController),
-                                  const SizedBox(height: 15),
-                                  CustomTextForm(label: "Имя", controller: nameController),
-                                  const SizedBox(height: 15),
-                                  CustomTextForm(label: "Отчество", controller: patronymicController),
-                                  const SizedBox(height: 15),
-                                  CustomTextForm(label: "Адресс", controller: addressController),
+                                  CustomTextForm(
+                                      label: "Email",
+                                      controller: emailController),
                                   const SizedBox(height: 15),
                                   CustomTextForm(
+                                      label: "Пароль",
+                                      controller: passController,
+                                      pass: true),
+                                  const SizedBox(height: 15),
+                                  CustomTextForm(
+                                      label: "Фамилия",
+                                      controller: surnameController),
+                                  const SizedBox(height: 15),
+                                  CustomTextForm(
+                                      label: "Имя", controller: nameController),
+                                  const SizedBox(height: 15),
+                                  CustomTextForm(
+                                      label: "Отчество",
+                                      controller: patronymicController),
+                                  const SizedBox(height: 15),
+                                  CustomTextForm(
+                                      label: "Адресс",
+                                      controller: addressController),
+                                  const SizedBox(height: 15),
+                                  CustomTextFormPhone(
                                     label: "Телефон",
                                     controller: phoneController,
                                     textInputType: TextInputType.number,
@@ -206,19 +244,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return Scaffold(
             appBar: MediaQuery.of(context).size.width > 300
                 ? AppBar(
-              title: const Text('Профиль'),
-              centerTitle: true,
-            )
+                    title: const Text('Профиль'),
+                    centerTitle: true,
+                  )
                 : const PreferredSize(
-                child: SizedBox(), preferredSize: Size(0, 0)),
+                    child: SizedBox(), preferredSize: Size(0, 0)),
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  ProfileRow(label: 'Фамилия', controller: surnameController, onTap: refactorUserData),
-                  ProfileRow(label: 'Имя', controller: nameController, onTap: refactorUserData),
-                  ProfileRow(label: 'Отчество', controller: patronymicController, onTap: refactorUserData),
-                  ProfileRow(label: 'Адрес', controller: addressController, onTap: refactorUserData),
-                  ProfileRow(label: 'Телефон', controller: phoneController, onTap: refactorUserData),
+                  ProfileRow(
+                      label: 'Фамилия',
+                      controller: surnameController,
+                      onTap: refactorUserData),
+                  ProfileRow(
+                      label: 'Имя',
+                      controller: nameController,
+                      onTap: refactorUserData),
+                  ProfileRow(
+                      label: 'Отчество',
+                      controller: patronymicController,
+                      onTap: refactorUserData),
+                  ProfileRow(
+                      label: 'Адрес',
+                      controller: addressController,
+                      onTap: refactorUserData),
+                  ProfileRow(
+                      label: 'Телефон',
+                      controller: phoneController,
+                      onTap: refactorUserData),
                 ],
               ),
             ),

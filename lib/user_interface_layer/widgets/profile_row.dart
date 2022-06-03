@@ -35,7 +35,7 @@ class _ProfileRowState extends State<ProfileRow> {
             child: TextFormField(
               keyboardType:
                   widget.label == 'Телефон' ? TextInputType.number : null,
-              enabled: !viewState,
+              enabled: !viewState, // состояние редактирования
               controller: widget.controller,
               decoration: InputDecoration(
                 border:

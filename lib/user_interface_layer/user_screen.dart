@@ -69,7 +69,7 @@ class _UserScreenState extends State<UserScreen> {
                     child: Row(
                       children: [
                         const Text("Адрес : ", style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(state.userData!.address),
+                        Expanded(child: Text(state.userData!.address)),
                       ],
                     ),
                   ),

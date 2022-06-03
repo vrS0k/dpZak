@@ -7,7 +7,7 @@ class CommentModel {
   String authorUid;
 
   CommentModel({
-    required this.comment,
+    required this.comment, // конструктор модели
     required this.grade,
     required this.projectId,
     required this.authorSurname,

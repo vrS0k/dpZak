@@ -16,17 +16,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'firebase_options.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   'high_importance_channel', // id
   'High Importance Notifications', // title
-  description: 'This channel is used for important notifications.', // description
+  description: 'This channel is used for important notifications.',
+  // description
   importance: Importance.max,
 );
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
@@ -36,7 +37,8 @@ Future<void> main() async {
   await FirebaseMessaging.instance.getToken();
 
   await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -64,12 +66,18 @@ Future<void> main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider<MembersCubit>(create: (context) => MembersCubit(firebaseRepository: _fire)),
-        BlocProvider<CommentsCubit>(create: (context) => CommentsCubit(firebaseRepository: _fire)),
-        BlocProvider<UserScreenCubit>(create: (context) => UserScreenCubit(firebaseRepository: _fire)),
-        BlocProvider<ProfileScreenCubit>(create: (context) => ProfileScreenCubit(firebaseRepository: _fire)),
-        BlocProvider<MainScreenCubit>(create: (context) => MainScreenCubit(firebaseRepository: _fire)),
-        BlocProvider<CreateScreenCubit>(create: (context) => CreateScreenCubit(firebaseRepository: _fire)),
+        BlocProvider<MembersCubit>(
+            create: (context) => MembersCubit(firebaseRepository: _fire)),
+        BlocProvider<CommentsCubit>(
+            create: (context) => CommentsCubit(firebaseRepository: _fire)),
+        BlocProvider<UserScreenCubit>(
+            create: (context) => UserScreenCubit(firebaseRepository: _fire)),
+        BlocProvider<ProfileScreenCubit>(
+            create: (context) => ProfileScreenCubit(firebaseRepository: _fire)),
+        BlocProvider<MainScreenCubit>(
+            create: (context) => MainScreenCubit(firebaseRepository: _fire)),
+        BlocProvider<CreateScreenCubit>(
+            create: (context) => CreateScreenCubit(firebaseRepository: _fire)),
       ],
       child: const MyApp(),
     ),

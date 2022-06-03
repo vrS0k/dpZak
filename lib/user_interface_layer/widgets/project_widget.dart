@@ -12,7 +12,7 @@ class ProjectWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => DetailProjectScreen(project: project)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => DetailProjectScreen(project: project))); // нажатие на проект переход на детальную странице
       },
       child: Padding(
         padding: const EdgeInsets.all(10.0),

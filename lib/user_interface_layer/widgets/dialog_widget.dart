@@ -15,8 +15,8 @@ class CustomDialog extends StatelessWidget {
           color: Colors.white,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center, // горизонтально по центру
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, // вертикальное расположение элементов
           children: [
             Expanded(
               child: Center(
@@ -32,7 +32,7 @@ class CustomDialog extends StatelessWidget {
                 Navigator.of(context).pop();
               },
               child: Container(
-                width: MediaQuery.of(context).size.width - 100,
+                width: MediaQuery.of(context).size.width - 100, // получаем дабл число равное ширине текущего экрана
                 height: 50,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),

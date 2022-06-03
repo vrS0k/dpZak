@@ -1,26 +1,27 @@
 import 'dart:developer';
-
 import 'package:diplom/data_layer/models/user_model.dart';
 import 'package:diplom/data_layer/repository/repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../user_interface_layer/widgets/dialog_widget.dart';
+import 'dart:async';
 
 class ProfileScreenState {
   ProfileScreenState({this.user, this.userData});
 
-  final UserCredential? user;
+  final UserCredential? user; // ? переменная с null
   final UserModel? userData;
 
   ProfileScreenState copyWith({UserCredential? user, UserModel? userData}) {
-    return ProfileScreenState(user: user ?? this.user, userData: userData ?? this.userData);
+    return ProfileScreenState(
+        user: user ?? this.user, userData: userData ?? this.userData); // положить юзера если null то оставить старого
   }
 }
 
 class ProfileScreenCubit extends Cubit<ProfileScreenState> {
-  ProfileScreenCubit({required this.firebaseRepository}) : super(ProfileScreenState());
-
+  ProfileScreenCubit({required this.firebaseRepository})
+      : super(ProfileScreenState());
   final FirebaseRepository firebaseRepository;
 
   Future<void> refactorUserData({
@@ -50,13 +51,13 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
         uid: uid,
         projectIdList: projectId,
       );
-      emit(state.copyWith(userData: userData));
+      emit(state.copyWith(userData: userData)); // emit кинуть стейт в ui
     } catch (e) {
-      log(e.toString());
+      log(e.toString()); //  ошибку в логи
     }
   }
 
-  Future<void> updateUser({required String uid}) async {
+  Future<void> updateUser({required String uid}) async { // запрос юзера в стейт с бд
     try {
       final UserModel userData = await firebaseRepository.getUserData(uid);
       emit(state.copyWith(user: state.user, userData: userData));
@@ -65,18 +66,23 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
     }
   }
 
-  Future<void> authFire({required String email, required String password, required BuildContext context}) async {
+  Future<void> authFire(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
     String errorMessage = "Произошла ошибка";
     try {
       final UserCredential user = await firebaseRepository.authFire(
         email: email,
         password: password,
       );
-      final UserModel userData = await firebaseRepository.getUserData(user.user!.uid);
+      final UserModel userData =
+          await firebaseRepository.getUserData(user.user!.uid);
       emit(state.copyWith(user: user, userData: userData));
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        errorMessage = 'Для этого адреса электронной почты не найдено ни одного пользователя.';
+    } on FirebaseAuthException catch (e) { // если ошибка
+      if (e.code == 'user-not-found') { // если код ошибки равен
+        errorMessage =
+            'Для этого адреса электронной почты не найдено ни одного пользователя.';
       } else if (e.code == 'wrong-password') {
         errorMessage = 'Для этого пользователя указан неверный пароль.';
       } else {
@@ -138,7 +144,8 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
       if (e.code == 'weak-password') {
         errorMessage = "Предоставленный пароль слишком слаб.";
       } else if (e.code == 'email-already-in-use') {
-        errorMessage = "Учетная запись для этого адреса электронной почты уже существует.";
+        errorMessage =
+            "Учетная запись для этого адреса электронной почты уже существует.";
       } else {
         errorMessage = e.message.toString();
       }

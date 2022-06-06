@@ -1,6 +1,7 @@
 import 'package:diplom/business_logic_layer/create_screen_cubit.dart';
 import 'package:diplom/business_logic_layer/profile_screen_cubit.dart';
 import 'package:diplom/user_interface_layer/widgets/custom_text_form.dart';
+import 'package:diplom/user_interface_layer/widgets/custom_text_form_date.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -50,7 +51,7 @@ class _CreateScreenState extends State<CreateScreen> {
                         const SizedBox(height: 15),
                         CustomTextForm(label: "Name", controller: _cubit.state.nameController),
                         const SizedBox(height: 15),
-                        CustomTextForm(
+                        CustomTextFormDate(
                           label: "Date",
                           controller: _cubit.state.dataController,
                           textInputType: TextInputType.number,

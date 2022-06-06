@@ -36,6 +36,7 @@ class _MainScreenState extends State<MainScreen> {
             return Scaffold(
               appBar: MediaQuery.of(context).size.width > 300
                   ? AppBar(
+                      key: const ValueKey('app'),
                       title: const Text('Main Screen'),
                       centerTitle: true,
                     )

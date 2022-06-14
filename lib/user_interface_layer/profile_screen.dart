@@ -55,7 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                         child: Container(
                           color: authState == AuthState.auth
-                              ? Colors.blue
+                              ? Colors.green
                               : Colors.white,
                           child: Container(
                             decoration: BoxDecoration(
@@ -66,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       bottomRight: Radius.circular(25)),
                               color: authState == AuthState.auth
                                   ? Colors.white
-                                  : Colors.blue,
+                                  : Colors.green,
                             ),
                             child: Center(
                               child: Text(
@@ -91,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Container(
                           color: authState == AuthState.auth
                               ? Colors.white
-                              : Colors.blue,
+                              : Colors.green,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: authState == AuthState.auth
@@ -100,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   : const BorderRadius.only(
                                       topLeft: Radius.circular(25)),
                               color: authState == AuthState.auth
-                                  ? Colors.blue
+                                  ? Colors.green
                                   : Colors.white,
                             ),
                             child: Center(
@@ -154,6 +154,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         );
                                       }
                                     },
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.green),
                                     child: const Text("Вход"),
                                   ),
                                 ],
@@ -224,6 +226,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         );
                                       }
                                     },
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.green),
                                     child: const Text("Регистрация"),
                                   ),
                                 ],
@@ -244,7 +248,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return Scaffold(
             appBar: MediaQuery.of(context).size.width > 300
                 ? AppBar(
-                    title: const Text('Профиль'),
+                    backgroundColor: Colors.green,
+                    title: const Text('Настройки'),
                     centerTitle: true,
                   )
                 : const PreferredSize(

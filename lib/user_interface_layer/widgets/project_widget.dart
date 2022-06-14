@@ -21,8 +21,8 @@ class ProjectWidget extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-                  border: Border.all(color: Colors.blue),
-                  color: Colors.blue),
+                  border: Border.all(color: Colors.green),
+                  color: Colors.green),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -46,7 +46,7 @@ class ProjectWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius:
                     const BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
-                border: Border.all(color: Colors.blue),
+                border: Border.all(color: Colors.green),
               ),
               child: Center(
                 child: Padding(

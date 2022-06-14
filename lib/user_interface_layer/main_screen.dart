@@ -36,8 +36,9 @@ class _MainScreenState extends State<MainScreen> {
             return Scaffold(
               appBar: MediaQuery.of(context).size.width > 300
                   ? AppBar(
+                      backgroundColor: Colors.green,
                       key: const ValueKey('app'),
-                      title: const Text('Main Screen'),
+                      title: const Text('Главное меню'),
                       centerTitle: true,
                     )
                   : const PreferredSize(
@@ -61,7 +62,7 @@ class _MainScreenState extends State<MainScreen> {
                       : const SizedBox(),
                   MediaQuery.of(context).size.width > 300
                       ? const Divider(
-                          color: Colors.blue, thickness: 1, height: 20)
+                          color: Colors.green, thickness: 1, height: 20)
                       : const SizedBox(),
                   Expanded(
                     child: SingleChildScrollView(

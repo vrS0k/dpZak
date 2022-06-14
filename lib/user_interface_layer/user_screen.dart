@@ -32,6 +32,7 @@ class _UserScreenState extends State<UserScreen> {
         if (state.userData != null) {
           return Scaffold(
             appBar: AppBar(
+              backgroundColor: Colors.green,
               title: Text(state.userData!.surname + " " + state.userData!.name),
             ),
             body: SingleChildScrollView(
@@ -89,13 +90,13 @@ class _UserScreenState extends State<UserScreen> {
                           },
                           child: Text(
                             state.userData!.phone,
-                            style: const TextStyle(color: Colors.blue),
+                            style: const TextStyle(color: Colors.green),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const Divider(color: Colors.blue, thickness: 1),
+                  const Divider(color: Colors.green, thickness: 1),
                   const Text('Проекты : ', style: TextStyle(fontWeight: FontWeight.bold)),
                   ...state.projects!.map((e) => ProjectWidget(project: e)).toList(),
                 ],
@@ -104,7 +105,7 @@ class _UserScreenState extends State<UserScreen> {
           );
         } else {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(backgroundColor: Colors.green),
           );
         }
       },

@@ -32,7 +32,8 @@ class _CreateScreenState extends State<CreateScreen> {
     return Scaffold( // виджет экрана у которого есть поля апп бар и боди
       appBar: MediaQuery.of(context).size.width > 300
           ? AppBar(
-        title: const Text('Создание проекта'),
+        backgroundColor: Colors.green,
+        title: const Text('Предложение проекта'),
         centerTitle: true,
       )
           : const PreferredSize(
@@ -49,15 +50,15 @@ class _CreateScreenState extends State<CreateScreen> {
                     child: Column(
                       children: [
                         const SizedBox(height: 15),
-                        CustomTextForm(label: "Name", controller: _cubit.state.nameController),
+                        CustomTextForm(label: "Название", controller: _cubit.state.nameController),
                         const SizedBox(height: 15),
                         CustomTextFormDate(
-                          label: "Date",
+                          label: "Дата",
                           controller: _cubit.state.dataController,
                           textInputType: TextInputType.number,
                         ),
                         const SizedBox(height: 15),
-                        CustomTextForm(label: "Information", controller: _cubit.state.informationController),
+                        CustomTextForm(label: "Описание", controller: _cubit.state.informationController),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: SizedBox(
@@ -171,7 +172,9 @@ class _CreateScreenState extends State<CreateScreen> {
                               );
                             }
                           },
-                          child: const Text("Create project"),
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.green),
+                          child: const Text("Предложить проект"),
                         ),
                       ],
                     ),

@@ -1,23 +1,23 @@
-// import 'dart:async';
-// import 'dart:js';
+// // import 'dart:async';
+// // import 'dart:js';
+// //
+// // import 'package:cloud_firestore/cloud_firestore.dart';
+// // import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+// // import 'package:diplom/main.dart';
+// // import 'package:flutter/material.dart';
+// // import 'package:flutter_test/flutter_test.dart';
 //
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
-// import 'package:diplom/main.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-
-// const MessagesCollection = 'messages';
-
-import 'package:diplom/business_logic_layer/comments_cubit.dart';
-import 'package:diplom/data_layer/repository/repository.dart';
-import 'package:test/test.dart';
-import 'package:bloc_test/bloc_test.dart';
-
-import 'package:bloc_test/bloc_test.dart';
-
-
-void main() {
+// // const MessagesCollection = 'messages';
+//
+// import 'package:diplom/business_logic_layer/comments_cubit.dart';
+// import 'package:diplom/data_layer/repository/repository.dart';
+// import 'package:test/test.dart';
+// import 'package:bloc_test/bloc_test.dart';
+//
+// import 'package:bloc_test/bloc_test.dart';
+//
+//
+// void main() {
 
 
 
@@ -118,7 +118,7 @@ void main() {
   // }
 
 
-
+  //
   // testWidgets('adds messages', (WidgetTester tester) async {
   //   // Instantiate the mock database.
   //   final firestore = FakeFirebaseFirestore();
@@ -140,7 +140,7 @@ void main() {
   //   // Verify the output.
   //   expect(find.text('Create project'), findsOneWidget);
   // });
-
+  //
 
 
 
@@ -216,5 +216,5 @@ void main() {
   // });
 
 
-
-}
+//
+// }

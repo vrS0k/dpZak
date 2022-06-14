@@ -36,7 +36,7 @@ class CustomDialog extends StatelessWidget {
                 height: 50,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
                 child: const Center(child: Text("OK", style: TextStyle(color: Colors.white))),
               ),

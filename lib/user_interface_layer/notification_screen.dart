@@ -29,7 +29,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
       appBar: MediaQuery.of(context).size.width > 300
           ? AppBar(
-              title: const Text('Notification Screen'),
+              backgroundColor: Colors.green,
+              title: const Text('Уведомления'),
               centerTitle: true,
             )
           : const PreferredSize(child: SizedBox(), preferredSize: Size(0, 0)),

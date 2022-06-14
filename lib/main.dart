@@ -120,23 +120,23 @@ class _MyAppState extends State<MyApp> {
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: "Main",
-                backgroundColor: Colors.blue,
+                label: "Главная",
+                backgroundColor: Colors.green,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.notifications),
-                label: "Notifications",
-                backgroundColor: Colors.blue,
+                label: "Уведомления",
+                backgroundColor: Colors.green,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.create),
-                label: "Create",
-                backgroundColor: Colors.blue,
+                label: "Предложить",
+                backgroundColor: Colors.green,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                label: "Profile",
-                backgroundColor: Colors.blue,
+                label: "Настройки",
+                backgroundColor: Colors.green,
               ),
             ],
             currentIndex: _selectedIndex,

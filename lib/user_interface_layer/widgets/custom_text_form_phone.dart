@@ -19,7 +19,7 @@ class CustomTextFormPhone extends StatelessWidget {
     this.onCleanTap,
   }) : super(key: key);
 
-  final maskFormatter = MaskTextInputFormatter(mask: '+# (###) ###-##-##');
+  final maskFormatter = MaskTextInputFormatter(mask: '+7 (###) ###-##-##');
 
   @override
   Widget build(BuildContext context) {

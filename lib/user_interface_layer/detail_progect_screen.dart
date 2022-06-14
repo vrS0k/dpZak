@@ -54,6 +54,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: Text(widget.project.name),
       ),
       body: SingleChildScrollView(
@@ -75,7 +76,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(30)),
-                    color: Colors.blue.withOpacity(0.2),
+                    color: Colors.green.withOpacity(0.2),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -193,7 +194,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                 ),
               ),
             ),
-            const Divider(color: Colors.blue, thickness: 1),
+            const Divider(color: Colors.green, thickness: 1),
             const Padding(
               padding: EdgeInsets.all(10.0),
               child: Text(
@@ -236,7 +237,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: const BorderRadius.all(Radius.circular(30)),
-                                      color: Colors.blue.withOpacity(0.2),
+                                      color: Colors.green.withOpacity(0.2),
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(10.0),
@@ -264,7 +265,9 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                                           context: context,
                                         );
                                       },
-                                      child: const Text('Учавствовать'),
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.green),
+                                      child: const Text('Присоединиться'),
                                     ),
                                 )
                           ],
@@ -282,7 +285,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                 }
               },
             ),
-            const Divider(color: Colors.blue, thickness: 1),
+            const Divider(color: Colors.green, thickness: 1),
             const Padding(
               padding: EdgeInsets.all(10.0),
               child: Text(
@@ -310,7 +313,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: const BorderRadius.all(Radius.circular(15)),
-                                                border: Border.all(color: Colors.blue),
+                                                border: Border.all(color: Colors.green),
                                               ),
                                               width: MediaQuery.of(context).size.width,
                                               child: Padding(
@@ -331,7 +334,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                                                       child: Container(
                                                         decoration: BoxDecoration(
                                                           borderRadius: const BorderRadius.all(Radius.circular(30)),
-                                                          color: Colors.blue.withOpacity(0.2),
+                                                          color: Colors.green.withOpacity(0.2),
                                                         ),
                                                         child: Padding(
                                                           padding: const EdgeInsets.all(10.0),
@@ -351,7 +354,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                                       .toList(),
                                 ),
                           const Divider(
-                            color: Colors.blue,
+                            color: Colors.green,
                             thickness: 1,
                             height: 30,
                           ),
@@ -392,6 +395,8 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
                                           );
                                         }
                                       },
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.green),
                                       child: const Text("Добавить"),
                                     ),
                                   ],

@@ -33,6 +33,7 @@ class _ProfileRowState extends State<ProfileRow> {
           SizedBox(
             width: MediaQuery.of(context).size.width / 2,
             child: TextFormField(
+              maxLines: widget.label == 'Адрес' ? 2 : 1,
               keyboardType:
                   widget.label == 'Телефон' ? TextInputType.number : null,
               enabled: !viewState, // состояние редактирования

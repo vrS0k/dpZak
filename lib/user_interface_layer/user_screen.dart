@@ -78,7 +78,7 @@ class _UserScreenState extends State<UserScreen> {
                     padding: const EdgeInsets.all(10.0),
                     child: Row(
                       children: [
-                        const Text("Телефон : ", style: TextStyle(fontWeight: FontWeight.bold)),
+                        const Text("Телефон: ", style: TextStyle(fontWeight: FontWeight.bold),),
                         GestureDetector(
                           onTap: () {
                             var url = "tel:${state.userData!.phone}";

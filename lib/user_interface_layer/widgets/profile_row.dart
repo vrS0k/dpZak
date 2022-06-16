@@ -4,12 +4,15 @@ class ProfileRow extends StatefulWidget {
   final String label;
   final TextEditingController controller;
   final Function() onTap;
+  final int? maxLines;
+  final int? minLines;
 
   const ProfileRow(
       {Key? key,
       required this.label,
       required this.controller,
-      required this.onTap})
+      required this.onTap,
+               this.maxLines, this.minLines})
       : super(key: key);
 
   @override
@@ -31,9 +34,11 @@ class _ProfileRowState extends State<ProfileRow> {
             child: Text(widget.label, textAlign: TextAlign.left),
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width / 2,
+            width: MediaQuery.of(context).size.width  / 2,
             child: TextFormField(
-              maxLines: widget.label == 'Адрес' ? 2 : 1,
+              maxLines: widget.maxLines,
+              minLines: widget.minLines,
+              maxLength: widget.label == 'Адрес' ? 65: null,
               keyboardType:
                   widget.label == 'Телефон' ? TextInputType.number : null,
               enabled: !viewState, // состояние редактирования

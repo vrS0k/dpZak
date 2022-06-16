@@ -271,10 +271,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap: refactorUserData),
                   ProfileRow(
                       label: 'Адрес',
+                      maxLines: 3,
+                      minLines: 1,
                       controller: addressController,
                       onTap: refactorUserData),
                   ProfileRow(
                       label: 'Телефон',
+                      maxLines: 2,
                       controller: phoneController,
                       onTap: refactorUserData),
                 ],

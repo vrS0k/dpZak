@@ -5,10 +5,10 @@ import 'package:diplom/data_layer/repository/repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserScreenState {
-  UserScreenState({this.projects, this.userData}); // конструктор класса для создания экземпляра класаа
+  UserScreenState({this.projects, this.userData});
 
   final UserModel? userData;
-  final List<ProjectModel>? projects; // дженерики обозначение элементов в листе
+  final List<ProjectModel>? projects;
 
   UserScreenState copyWith({List<ProjectModel>? projects, UserModel? userData}) {
     return UserScreenState(projects: projects ?? this.projects, userData: userData ?? this.userData);

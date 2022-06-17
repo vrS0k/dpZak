@@ -28,7 +28,7 @@ class MembersCubit extends Cubit<MembersState> {
     }
   }
 
-  void clean (){ // сброс ранее загруженных участников
+  void clean (){
     emit(MembersState(status: MembersStatus.loading));
   }
 

@@ -10,12 +10,12 @@ import 'dart:async';
 class ProfileScreenState {
   ProfileScreenState({this.user, this.userData});
 
-  final UserCredential? user; // ? переменная с null
+  final UserCredential? user;
   final UserModel? userData;
 
   ProfileScreenState copyWith({UserCredential? user, UserModel? userData}) {
     return ProfileScreenState(
-        user: user ?? this.user, userData: userData ?? this.userData); // положить юзера если null то оставить старого
+        user: user ?? this.user, userData: userData ?? this.userData);
   }
 }
 
@@ -51,13 +51,13 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
         uid: uid,
         projectIdList: projectId,
       );
-      emit(state.copyWith(userData: userData)); // emit кинуть стейт в ui
+      emit(state.copyWith(userData: userData));
     } catch (e) {
-      log(e.toString()); //  ошибку в логи
+      log(e.toString());
     }
   }
 
-  Future<void> updateUser({required String uid}) async { // запрос юзера в стейт с бд
+  Future<void> updateUser({required String uid}) async {
     try {
       final UserModel userData = await firebaseRepository.getUserData(uid);
       emit(state.copyWith(user: state.user, userData: userData));
@@ -79,8 +79,8 @@ class ProfileScreenCubit extends Cubit<ProfileScreenState> {
       final UserModel userData =
           await firebaseRepository.getUserData(user.user!.uid);
       emit(state.copyWith(user: user, userData: userData));
-    } on FirebaseAuthException catch (e) { // если ошибка
-      if (e.code == 'user-not-found') { // если код ошибки равен
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
         errorMessage =
             'Для этого адреса электронной почты не найдено ни одного пользователя.';
       } else if (e.code == 'wrong-password') {

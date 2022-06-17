@@ -3,35 +3,35 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
 
-  // testWidgets('finds a widget using a Key', (tester) async {
-  //   const testKey = Key('AppBar');
-  //   await tester.pumpWidget(MaterialApp(key: testKey, home: Container()));
-  //   expect(find.byKey(testKey), findsOneWidget);
-  // });
-  //
-  // testWidgets('finds a widget using a Key', (tester) async {
-  //   const testKey = Key('BotNav');
-  //   await tester.pumpWidget(MaterialApp(key: testKey, home: Container()));
-  //   expect(find.byKey(testKey), findsOneWidget);
-  // });
-  //
-  // testWidgets('finds a widget using a Key', (tester) async {
-  //   const testKey = Key('btnReg');
-  //   await tester.pumpWidget(MaterialApp(key: testKey, home: Container()));
-  //   expect(find.byKey(testKey), findsOneWidget);
-  // });
-  //
-  // testWidgets('finds a widget using a Key', (tester) async {
-  //   const testKey = Key('btnAuth');
-  //   await tester.pumpWidget(MaterialApp(key: testKey, home: Container()));
-  //   expect(find.byKey(testKey), findsOneWidget);
-  // });
-  //
-  // testWidgets('finds a widget using a Key', (tester) async {
-  //   const testKey = Key('Map');
-  //   await tester.pumpWidget(MaterialApp(key: testKey, home: Container()));
-  //   expect(find.byKey(testKey), findsOneWidget);
-  // });
+  testWidgets('finds a widget using a Key', (tester) async {
+    const testKey = Key('AppBar');
+    await tester.pumpWidget(MaterialApp(key: testKey, home: Container()));
+    expect(find.byKey(testKey), findsOneWidget);
+  });
+
+  testWidgets('finds a widget using a Key', (tester) async {
+    const testKey = Key('BotNav');
+    await tester.pumpWidget(MaterialApp(key: testKey, home: Container()));
+    expect(find.byKey(testKey), findsOneWidget);
+  });
+
+  testWidgets('finds a widget using a Key', (tester) async {
+    const testKey = Key('btnReg');
+    await tester.pumpWidget(MaterialApp(key: testKey, home: Container()));
+    expect(find.byKey(testKey), findsOneWidget);
+  });
+
+  testWidgets('finds a widget using a Key', (tester) async {
+    const testKey = Key('btnAuth');
+    await tester.pumpWidget(MaterialApp(key: testKey, home: Container()));
+    expect(find.byKey(testKey), findsOneWidget);
+  });
+
+  testWidgets('finds a widget using a Key', (tester) async {
+    const testKey = Key('Map');
+    await tester.pumpWidget(MaterialApp(key: testKey, home: Container()));
+    expect(find.byKey(testKey), findsOneWidget);
+  });
 
   testWidgets('finds a Text widget', (tester) async {
     await tester.pumpWidget(const MaterialApp(

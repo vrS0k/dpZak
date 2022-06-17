@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../user_interface_layer/widgets/dialog_widget.dart';
 
-enum CommentsStatus { loading, data, failure } // модель типа данных бул
+enum CommentsStatus { loading, data, failure }
 
-class CommentsState { // класс для ui слоя
+class CommentsState {
   CommentsState({required this.status, this.comments});
 
   final List<CommentModel>? comments;
-  final CommentsStatus status; // типо константы
+  final CommentsStatus status;
 }
 
 class CommentsCubit extends Cubit<CommentsState> {
-  CommentsCubit({required this.firebaseRepository}) : super(CommentsState(status: CommentsStatus.loading)); // при первом создании подгрузка первого состояния
+  CommentsCubit({required this.firebaseRepository}) : super(CommentsState(status: CommentsStatus.loading));
 
   final FirebaseRepository firebaseRepository;
 
-  Future<void> getComments(String projectId) async { // асинхр функция для await
+  Future<void> getComments(String projectId) async {
     try {
       List<CommentModel> list = await firebaseRepository.getComments(projectId);
       emit(CommentsState(status: CommentsStatus.data, comments: list));
@@ -28,7 +28,7 @@ class CommentsCubit extends Cubit<CommentsState> {
   }
 
   Future<void> addComment({
-    required String comment, // обязательная переменная
+    required String comment,
     required String grade,
     required String projectId,
     required String authorSurname,
@@ -46,15 +46,15 @@ class CommentsCubit extends Cubit<CommentsState> {
         authorName: authorName,
         authorUid: authorUid,
       );
-      FocusScope.of(context).unfocus(); // убрать клаву
+      FocusScope.of(context).unfocus();
       result = 'Комментарий добавлен';
       getComments(projectId);
     } catch (e) {
       result = 'Произошла ошибка';
     }
     showDialog(
-      context: context, // контекчст из ui для окна
-      builder: (_) { // что строется
+      context: context,
+      builder: (_) {
         return CustomDialog(text: result);
       },
     );

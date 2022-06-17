@@ -38,7 +38,7 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
     _membersCubit.getMembers(widget.project.id);
     thisUser = false; // участник или нет
     _commentsCubit.getComments(widget.project.id);
-    SharedPreferences.getInstance().then((value) { // локальное хранение открытых проектов для уведомлений
+    SharedPreferences.getInstance().then((value) {
       setState(() {
         List<String> viewList = value.getStringList('items') ?? [];
         if (!viewList.contains(widget.project.id)){

@@ -6,10 +6,10 @@ import 'package:diplom/data_layer/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseRepository {
-  CollectionReference comments = FirebaseFirestore.instance.collection('comments'); //  создание переменной коментс = коллекции коментс
+  CollectionReference comments = FirebaseFirestore.instance.collection('comments');
   CollectionReference projects = FirebaseFirestore.instance.collection('projects');
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  FirebaseAuth auth = FirebaseAuth.instance; // переменная для общения с файрб
+  FirebaseAuth auth = FirebaseAuth.instance;
 
 
 
@@ -70,13 +70,13 @@ class FirebaseRepository {
     }
   }
 
-  Future<List<ProjectModel>> getProjectsBuUid(String uid) async { // получаем проект по uid конкр пользователя
+  Future<List<ProjectModel>> getProjectsBuUid(String uid) async {
     try {
-      List<ProjectModel> projectsList = []; // создаем лист = пустому массиву
+      List<ProjectModel> projectsList = [];
       await projects.where("authorUid", isEqualTo: uid).get().then(
             (value) {
-          for (var element in value.docs) { // пройтись по всем элементам которые пришли
-            Map mapResponse = element.data() as Map; // переменная =
+          for (var element in value.docs) {
+            Map mapResponse = element.data() as Map;
             projectsList.add(ProjectModel(
               name: mapResponse["name"],
               date: mapResponse["date"],

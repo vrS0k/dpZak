@@ -41,7 +41,7 @@ class _ProfileRowState extends State<ProfileRow> {
               maxLength: widget.label == 'Адрес' ? 65: null,
               keyboardType:
                   widget.label == 'Телефон' ? TextInputType.number : null,
-              enabled: !viewState, // состояние редактирования
+              enabled: !viewState,
               controller: widget.controller,
               decoration: InputDecoration(
                 border:

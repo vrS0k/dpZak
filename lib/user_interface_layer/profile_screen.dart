@@ -204,7 +204,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       controller: patronymicController),
                                   const SizedBox(height: 15),
                                   CustomTextForm(
-                                      label: "Адресс",
+                                      label: "Адрес",
                                       controller: addressController),
                                   const SizedBox(height: 15),
                                   CustomTextFormPhone(

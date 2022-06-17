@@ -28,6 +28,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late final ProfileScreenCubit _cubit;
   AuthState authState = AuthState.auth;
 
+  get maskFormatter => null;
+
   @override
   void initState() {
     _cubit = BlocProvider.of<ProfileScreenCubit>(context);
@@ -273,11 +275,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       label: 'Адрес',
                       maxLines: 3,
                       minLines: 1,
+                      maxLength: 65,
                       controller: addressController,
                       onTap: refactorUserData),
                   ProfileRow(
                       label: 'Телефон',
                       maxLines: 2,
+                      minLines: 1,
+                      inputFormatters: [maskFormatter],
                       controller: phoneController,
                       onTap: refactorUserData),
                 ],

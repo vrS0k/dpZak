@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class ProfileRow extends StatefulWidget {
   final String label;
@@ -6,13 +7,17 @@ class ProfileRow extends StatefulWidget {
   final Function() onTap;
   final int? maxLines;
   final int? minLines;
+  final int? maxLength;
+  final List? inputFormatters;
+
+
 
   const ProfileRow(
       {Key? key,
       required this.label,
       required this.controller,
       required this.onTap,
-               this.maxLines, this.minLines})
+               this.maxLines, this.minLines, this.maxLength, this.inputFormatters})
       : super(key: key);
 
   @override
@@ -21,6 +26,8 @@ class ProfileRow extends StatefulWidget {
 
 class _ProfileRowState extends State<ProfileRow> {
   bool viewState = true;
+
+  final maskFormatter = MaskTextInputFormatter(mask: '+7 ### ###-##-##');
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +45,8 @@ class _ProfileRowState extends State<ProfileRow> {
             child: TextFormField(
               maxLines: widget.maxLines,
               minLines: widget.minLines,
-              maxLength: widget.label == 'Адрес' ? 65: null,
+              maxLength: widget.maxLength,
+              inputFormatters: [maskFormatter],
               keyboardType:
                   widget.label == 'Телефон' ? TextInputType.number : null,
               enabled: !viewState,
